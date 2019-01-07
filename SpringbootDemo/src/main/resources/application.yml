@@ -1,0 +1,39 @@
+server:
+  port: 8888
+  context-path: /study
+
+spring:
+  datasource:
+    name: test
+    password: 217024
+    username: root
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://192.168.17.14:3306/study?useUnicode=true&characterEncoding=utf8&useSSL=false
+  redis:
+    database: 0
+    host: 192.168.17.14
+    port: 6379
+    pool:
+      max-active: 8
+      max-idle: 1
+      max-wait: -1
+      min-idle: 0
+    timeout: 0
+    cluster:
+      nodes: 192.168.17.14:9001,192.168.17.14:9002,192.168.17.14:9003,192.168.17.15:9001,192.168.17.15:9002,192.168.17.15:9003,192.168.17.16:9001,192.168.17.16:9002,192.168.17.16:9003
+
+mybatis:
+  mapper-locations: classpath*:com/ruanbanhai/springboot/demo/dao/**.xml
+  type-aliases-package: com.ruanbanhai.springboot.demo.pojo
+
+redis:
+    database: 1
+    host: 192.168.17.15
+    port: 6379
+    pool:
+      max-active: 8
+      max-idle: 1
+      max-wait: -1
+      min-idle: 0
+    timeout: 0
+
