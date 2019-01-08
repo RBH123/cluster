@@ -14,7 +14,7 @@ import redis.clients.jedis.JedisPoolConfig;
 
 import java.util.HashSet;
 
-@Configuration
+@Configuration(value = "spring.redis")
 public class RedisConfig {
 
     @Value("${spring.redis.host}")
@@ -55,6 +55,7 @@ public class RedisConfig {
                 Integer.parseInt(maxWait)));
         redisTemplate.setKeySerializer(new StringRedisSerializer());
         redisTemplate.setValueSerializer(new StringRedisSerializer());
+
         return redisTemplate;
     }
 
@@ -87,6 +88,13 @@ public class RedisConfig {
         jedisConnectionFactory.afterPropertiesSet();
         return jedisConnectionFactory;
     }
+//    public LettuceConnectionFactory getLettuceConnectionFactory(String hostname, int port, int maxIdle, int maxActive, int maxWait){
+//        LettuceConnectionFactory lettuceConnectionFactory = new LettuceConnectionFactory();
+//        lettuceConnectionFactory.setDatabase(0);
+//        lettuceConnectionFactory.setPort(port);
+//        lettuceConnectionFactory.setHostName(hostname);
+//        return lettuceConnectionFactory;
+//    }
 
     private RedisConnectionFactory stringRedisConnectionFactory(String hostname, int port, int maxIdle, int maxActive, int maxWait){
         JedisConnectionFactory jedisConnectionFactory = new JedisConnectionFactory();

@@ -1,6 +1,7 @@
 server:
   port: 8888
-  context-path: /study
+  servlet:
+    context-path: /study
 
 spring:
   datasource:
@@ -13,14 +14,14 @@ spring:
     database: 0
     host: 192.168.17.14
     port: 6379
-    pool:
-      max-active: 8
-      max-idle: 1
-      max-wait: -1
-      min-idle: 0
     timeout: 0
     cluster:
       nodes: 192.168.17.14:9001,192.168.17.14:9002,192.168.17.14:9003,192.168.17.15:9001,192.168.17.15:9002,192.168.17.15:9003,192.168.17.16:9001,192.168.17.16:9002,192.168.17.16:9003
+    pool:
+      max-active: 8
+      max-wait: -1
+      max-idle: 8
+      min-idle: 0
 
 mybatis:
   mapper-locations: classpath*:com/ruanbanhai/springboot/demo/dao/**.xml
@@ -33,7 +34,9 @@ redis:
     pool:
       max-active: 8
       max-idle: 1
-      max-wait: -1
+      max-wait: 0
       min-idle: 0
     timeout: 0
+
+
 
