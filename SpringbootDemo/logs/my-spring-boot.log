@@ -1,0 +1,12 @@
+2019-01-08 18:24:36,036:INFO restartedMain (PluginsService.java:190) - no modules loaded
+2019-01-08 18:24:36,039:INFO restartedMain (PluginsService.java:193) - loaded plugin [org.elasticsearch.index.reindex.ReindexPlugin]
+2019-01-08 18:24:36,039:INFO restartedMain (PluginsService.java:193) - loaded plugin [org.elasticsearch.join.ParentJoinPlugin]
+2019-01-08 18:24:36,040:INFO restartedMain (PluginsService.java:193) - loaded plugin [org.elasticsearch.percolator.PercolatorPlugin]
+2019-01-08 18:24:36,040:INFO restartedMain (PluginsService.java:193) - loaded plugin [org.elasticsearch.script.mustache.MustachePlugin]
+2019-01-08 18:24:36,041:INFO restartedMain (PluginsService.java:193) - loaded plugin [org.elasticsearch.transport.Netty4Plugin]
+2019-01-08 18:26:09,576:INFO restartedMain (PluginsService.java:190) - no modules loaded
+2019-01-08 18:26:09,580:INFO restartedMain (PluginsService.java:193) - loaded plugin [org.elasticsearch.index.reindex.ReindexPlugin]
+2019-01-08 18:26:09,581:INFO restartedMain (PluginsService.java:193) - loaded plugin [org.elasticsearch.join.ParentJoinPlugin]
+2019-01-08 18:26:09,581:INFO restartedMain (PluginsService.java:193) - loaded plugin [org.elasticsearch.percolator.PercolatorPlugin]
+2019-01-08 18:26:09,581:INFO restartedMain (PluginsService.java:193) - loaded plugin [org.elasticsearch.script.mustache.MustachePlugin]
+2019-01-08 18:26:09,582:INFO restartedMain (PluginsService.java:193) - loaded plugin [org.elasticsearch.transport.Netty4Plugin]
