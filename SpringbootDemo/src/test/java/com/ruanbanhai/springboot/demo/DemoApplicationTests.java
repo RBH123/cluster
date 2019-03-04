@@ -3,15 +3,14 @@ package com.ruanbanhai.springboot.demo;
 import com.ruanbanhai.springboot.demo.pojo.BannerItem;
 import com.ruanbanhai.springboot.demo.pojo.Goods;
 import com.ruanbanhai.springboot.demo.util.Consumer;
+import com.ruanbanhai.springboot.demo.util.ObjectToMap;
 import com.ruanbanhai.springboot.demo.util.Producer;
 import com.ruanbanhai.springboot.demo.util.WebCrawler;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.beanutils.BeanUtils;
 import org.elasticsearch.action.admin.indices.create.CreateIndexRequestBuilder;
 import org.elasticsearch.action.admin.indices.create.CreateIndexResponse;
 import org.elasticsearch.action.bulk.BulkProcessor;
 import org.elasticsearch.action.bulk.BulkRequest;
-import org.elasticsearch.action.bulk.BulkRequestBuilder;
 import org.elasticsearch.action.bulk.BulkResponse;
 import org.elasticsearch.action.delete.DeleteRequest;
 import org.elasticsearch.action.index.IndexRequest;
@@ -31,7 +30,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.context.TestComponent;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 import redis.clients.jedis.HostAndPort;
@@ -199,8 +198,8 @@ public class DemoApplicationTests {
         WebCrawler.crawlerUrl(url);
     }
 
-    @Resource(name = "stringRedisTemplate")
-    private StringRedisTemplate redisTemplate;
+    @Resource(name = "redisQueue")
+    private RedisTemplate redisTemplate;
 
     @Test
     public void test12() {
@@ -226,9 +225,6 @@ public class DemoApplicationTests {
         nodes.add(new HostAndPort("192.168.17.15", 9001));
         nodes.add(new HostAndPort("192.168.17.15", 9002));
         nodes.add(new HostAndPort("192.168.17.15", 9003));
-        nodes.add(new HostAndPort("192.168.17.16", 9001));
-        nodes.add(new HostAndPort("192.168.17.16", 9002));
-        nodes.add(new HostAndPort("192.168.17.16", 9003));
         JedisCluster jc = new JedisCluster(nodes);
         jc.append("username1", "zhangsan");
         String username = jc.get("username");
@@ -418,6 +414,22 @@ public class DemoApplicationTests {
             String sourceAsString = hit.getSourceAsString();
             System.out.println(sourceAsString);
         }
+    }
+
+
+    @Test
+    public void test25(){
+        redisTemplate.opsForValue().set("goods","小米9");
+    }
+
+    @Test
+    public void test26() throws IllegalAccessException, IntrospectionException, InvocationTargetException {
+        Goods goods = new Goods();
+        goods.setGoodsDescription("中国创造");
+        goods.setGoodsName("华为");
+        goods.setId(1);
+        Map<String, Object> map = ObjectToMap.toMap(goods);
+        System.out.println(map);
     }
 }
 

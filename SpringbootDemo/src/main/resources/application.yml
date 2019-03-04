@@ -1,5 +1,5 @@
 server:
-  port: 8888
+  port: 8999
   servlet:
     context-path: /study
 
@@ -14,20 +14,32 @@ spring:
     database: 0
     host: 192.168.17.14
     port: 6379
-    timeout: 0
     cluster:
-      nodes: 192.168.17.14:9001,192.168.17.14:9002,192.168.17.14:9003,192.168.17.15:9001,192.168.17.15:9002,192.168.17.15:9003,192.168.17.16:9001,192.168.17.16:9002,192.168.17.16:9003
-    pool:
-      max-active: 8
-      max-wait: -1
-      max-idle: 8
-      min-idle: 0
+      nodes: 192.168.17.14:9001,192.168.17.14:9002,192.168.17.14:9003,192.168.17.15:9001,192.168.17.15:9002,192.168.17.15:9003
+    lettuce:
+      pool:
+        min-idle: 0
+        max-wait: -1ms
+        max-idle: 8
+        max-active: 8
   data:
     mongodb:
-      database: admin
+      database: test
       host: 192.168.17.14
       port: 27017
-
+  kafka:
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      bootstrap-servers: 192.168.17.14:9092,192.168.17.15:9092
+    consumer:
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      group-id: consumer_group
+      auto-offset-reset: earliest
+      enable-auto-commit: true
+      bootstrap-servers: 192.168.17.14:9092,192.168.17.15:9092
+      auto-commit-interval: 10ms
 
 mybatis:
   mapper-locations: classpath*:com/ruanbanhai/springboot/demo/dao/**.xml
