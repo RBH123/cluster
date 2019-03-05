@@ -1,15 +1,8 @@
 server:
   port: 8999
-  servlet:
-    context-path: /study
 
 spring:
-  datasource:
-    name: test
-    password: 217024
-    username: root
-    driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://192.168.17.14:3306/study?useUnicode=true&characterEncoding=utf8&useSSL=false
+
   redis:
     database: 0
     host: 192.168.17.14
@@ -40,7 +33,13 @@ spring:
       enable-auto-commit: true
       bootstrap-servers: 192.168.17.14:9092,192.168.17.15:9092
       auto-commit-interval: 10ms
-
+  datasource:
+    data-username: root
+    data-password: 217024
+    url: jdbc:mysql://192.168.17.14:3306/study?useUnicode=true&characterEncoding=utf8&useSSL=false
+    driver-class-name: com.mysql.jdbc.Driver
+  main:
+    allow-bean-definition-overriding: true
 mybatis:
   mapper-locations: classpath*:com/ruanbanhai/springboot/demo/dao/**.xml
   type-aliases-package: com.ruanbanhai.springboot.demo.pojo
@@ -56,6 +55,15 @@ redis:
       min-idle: 0
     timeout: 0
 
+eureka:
+  instance:
+    hostname: eureka
+    prefer-ip-address: true
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+    service-url:
+      defaultZone: http://192.168.80.30:8999/eureka/
 
 
 
