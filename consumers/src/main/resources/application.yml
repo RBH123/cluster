@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: consumers
+server:
+  port: 9003
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    service-url:
+      defaultZone: http://192.168.17.14:8999/eureka/

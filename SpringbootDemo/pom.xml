@@ -5,17 +5,18 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>1.4.2.RELEASE</version>
+		<version>2.1.3.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.ruanbanhai.springboot</groupId>
-	<artifactId>demo</artifactId>
+	<groupId>com.ruanbanhai.demo</groupId>
+	<artifactId>eureka</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>demo</name>
+	<name>eureka</name>
 	<description>Demo project for Spring Boot</description>
-
 	<properties>
 		<java.version>1.8</java.version>
+		<elasticsearch.version>6.5.4</elasticsearch.version>
+		<redis.version>2.1.3</redis.version>
 	</properties>
 
 	<dependencies>
@@ -31,17 +32,22 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-redis</artifactId>
-			<version>2.1.1.RELEASE</version>
+			<version>2.1.2.RELEASE</version>
+			<exclusions>
+				<exclusion>
+					<groupId>redis.clients</groupId>
+					<artifactId>jedis</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>io.lettuce</groupId>
+					<artifactId>lettuce-core</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
-			<groupId>org.springframework.data</groupId>
-			<artifactId>spring-data-redis</artifactId>
-			<version>1.7.1.RELEASE</version>
-		</dependency>
-        <dependency>
-            <groupId>redis.clients</groupId>
-            <artifactId>jedis</artifactId>
-			<version>2.8.1</version>
+			<groupId>redis.clients</groupId>
+			<artifactId>jedis</artifactId>
+			<version>2.10.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -56,7 +62,6 @@
 			<artifactId>mybatis-spring-boot-starter</artifactId>
 			<version>1.3.2</version>
 		</dependency>
-
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
@@ -68,11 +73,11 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-        <dependency>
-            <groupId>lombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>1.0</version>
-        </dependency>
+		<dependency>
+			<groupId>lombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.0</version>
+		</dependency>
 		<dependency>
 			<groupId>com.alibaba</groupId>
 			<artifactId>druid</artifactId>
@@ -133,30 +138,59 @@
 		<dependency>
 			<groupId>commons-beanutils</groupId>
 			<artifactId>commons-beanutils</artifactId>
-            <version>1.9.3</version>
+			<version>1.9.3</version>
 		</dependency>
 		<dependency>
 			<groupId>commons-logging</groupId>
 			<artifactId>commons-logging</artifactId>
 			<version>1.2</version>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework.kafka</groupId>
+			<artifactId>spring-kafka</artifactId>
+			<version>2.2.1.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-pool2</artifactId>
+			<version>2.6.1</version>
+		</dependency>
+		<dependency>
+			<groupId>io.lettuce</groupId>
+			<artifactId>lettuce-core</artifactId>
+			<version>5.1.4.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>com.alicp.jetcache</groupId>
+			<artifactId>jetcache-starter-redis</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-eureka-server</artifactId>
+			<version>2.0.0.BUILD-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-eureka</artifactId>
+			<version>2.0.0.BUILD-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 	<repositories>
-	<repository>
-		<id>spring-libs-snapshot</id>
-		<name>Spring Snapshot Repository</name>
-		<url>http://repo.spring.io/libs-snapshot</url>
-	</repository>
-	<repository>
-		<id>elasticsearch-releases</id>
-		<url>https://artifacts.elastic.co/maven</url>
-		<releases>
-			<enabled>true</enabled>
-		</releases>
-		<snapshots>
-			<enabled>false</enabled>
-		</snapshots>
-	</repository>
+		<repository>
+			<id>spring-libs-snapshot</id>
+			<name>Spring Snapshot Repository</name>
+			<url>http://repo.spring.io/libs-snapshot</url>
+		</repository>
+		<repository>
+			<id>elasticsearch-releases</id>
+			<url>https://artifacts.elastic.co/maven</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
 	</repositories>
 	<build>
 		<plugins>
