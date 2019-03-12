@@ -33,7 +33,7 @@ public class RedisConfig {
     private String nodes;
 
     @Bean(name = "jedisCluster")
-    public JedisCluster jedisCluster(){
+    public JedisCluster jedisCluster(LettuceConnectionFactory lettuceConnectionFactory){
         String[] split = nodes.split(",");
         Set<HostAndPort> cluster = new HashSet<HostAndPort>();
         for (String s : split) {
@@ -44,24 +44,16 @@ public class RedisConfig {
     }
 
     @Bean(name = "redisQueue")
-    public RedisTemplate reidsTemplate(){
+    public RedisTemplate reidsTemplate(LettuceConnectionFactory lettuceConnectionFactory){
         System.out.println(hostname);
         RedisTemplate redisTemplate = new RedisTemplate();
-        redisTemplate.setConnectionFactory(getLettuceConnectionFactory0());
+        redisTemplate.setConnectionFactory(lettuceConnectionFactory());
         redisTemplate.setKeySerializer(new StringRedisSerializer());
         redisTemplate.setValueSerializer(new StringRedisSerializer());
 
         return redisTemplate;
     }
 
-    @Bean(name = "stringRedisTemplate")
-    public StringRedisTemplate stringReidsTemplate(){
-        StringRedisTemplate redisTemplate = new StringRedisTemplate();
-        redisTemplate.setConnectionFactory(getLettuceConnectionFactory1());
-        redisTemplate.setKeySerializer(new StringRedisSerializer());
-        redisTemplate.setValueSerializer(new StringRedisSerializer());
-        return redisTemplate;
-    }
 
 //    //构造链接工厂
 //    private RedisConnectionFactory redisConnectionFactory(String hostname, int port, int maxIdle, int maxActive, int maxWait){
@@ -73,39 +65,18 @@ public class RedisConfig {
 //        jedisConnectionFactory.afterPropertiesSet();
 //        return jedisConnectionFactory;
 //    }
-    public LettuceConnectionFactory getLettuceConnectionFactory0(){
+    @Bean
+    public LettuceConnectionFactory lettuceConnectionFactory(){
         RedisStandaloneConfiguration redisStandaloneConfiguration = new RedisStandaloneConfiguration();
         redisStandaloneConfiguration.setDatabase(0);
         redisStandaloneConfiguration.setHostName(hostname);
-        redisStandaloneConfiguration.setPort(Integer.parseInt(port));
+        redisStandaloneConfiguration.setPort(port != null?Integer.parseInt(port):0);
         LettuceClientConfiguration lettuceClientConfiguration = LettucePoolingClientConfiguration
                 .builder().poolConfig(poolConfig()) 
                 .build();
         LettuceConnectionFactory connectionFactory = new LettuceConnectionFactory(redisStandaloneConfiguration, lettuceClientConfiguration);
         return connectionFactory;
     }
-
-    public LettuceConnectionFactory getLettuceConnectionFactory1(){
-        RedisStandaloneConfiguration redisStandaloneConfiguration = new RedisStandaloneConfiguration();
-        redisStandaloneConfiguration.setDatabase(1);
-        redisStandaloneConfiguration.setHostName(hostname);
-        redisStandaloneConfiguration.setPort(Integer.parseInt(port));
-        LettuceClientConfiguration lettuceClientConfiguration = LettucePoolingClientConfiguration.builder()
-                .poolConfig(poolConfig())
-                .build();
-        LettuceConnectionFactory connectionFactory = new LettuceConnectionFactory(redisStandaloneConfiguration, lettuceClientConfiguration);
-        return connectionFactory;
-    }
-
-//    private RedisConnectionFactory stringRedisConnectionFactory(String hostname, int port, int maxIdle, int maxActive, int maxWait){
-//        JedisConnectionFactory jedisConnectionFactory = new JedisConnectionFactory();
-//        jedisConnectionFactory.setHostNamse(hostname);
-//        jedisConnectionFactory.setDatabase(0);
-//        jedisConnectionFactory.setPort(port);
-//        jedisConnectionFactory.setPoolConfig(jedisPoolConfig(maxIdle,maxActive,maxWait));
-//        jedisConnectionFactory.afterPropertiesSet();
-//        return jedisConnectionFactory;
-//    }
 
     //构造连接池
 //    private JedisPoolConfig jedisPoolConfig(int maxIdle, int maxActive, int maxWait){
@@ -117,8 +88,8 @@ public class RedisConfig {
 //    }
     public GenericObjectPoolConfig poolConfig(){
         GenericObjectPoolConfig genericObjectPoolConfig = new GenericObjectPoolConfig();
-        genericObjectPoolConfig.setMaxTotal(Integer.parseInt(maxActive));
-        genericObjectPoolConfig.setMaxIdle(Integer.parseInt(maxIdle));
+        genericObjectPoolConfig.setMaxTotal(maxActive != null?Integer.parseInt(maxActive):0);
+        genericObjectPoolConfig.setMaxIdle(maxIdle != null?Integer.parseInt(maxIdle):0);
         return genericObjectPoolConfig;
     }
 }

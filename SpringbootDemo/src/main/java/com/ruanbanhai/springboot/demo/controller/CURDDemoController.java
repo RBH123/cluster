@@ -20,7 +20,7 @@ public class CURDDemoController{
 
     @RequestMapping(value = "/demo",method = RequestMethod.POST)
     public void demo1(@RequestBody User user){
+        System.out.println(user.getUsername());
         curdService.insertData(user);
     }
-
 }

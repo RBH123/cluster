@@ -5,6 +5,7 @@ import com.ruanbanhai.springboot.demo.pojo.User;
 import com.ruanbanhai.springboot.demo.service.CURDService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Service;
 
 @Slf4j
@@ -12,10 +13,11 @@ import org.springframework.stereotype.Service;
 public class CURDServiceImpl implements CURDService{
 
     @Autowired
-    private UserMapper userMapper;
+    private MongoTemplate mongoTemplate;
 
     @Override
     public void insertData(User user) {
-        userMapper.insert(user);
+        User insert = mongoTemplate.insert(user);
+        System.out.println(insert.toString());
     }
 }

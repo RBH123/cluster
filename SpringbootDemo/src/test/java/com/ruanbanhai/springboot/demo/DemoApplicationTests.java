@@ -2,9 +2,7 @@ package com.ruanbanhai.springboot.demo;
 
 import com.ruanbanhai.springboot.demo.pojo.BannerItem;
 import com.ruanbanhai.springboot.demo.pojo.Goods;
-import com.ruanbanhai.springboot.demo.util.Consumer;
 import com.ruanbanhai.springboot.demo.util.ObjectToMap;
-import com.ruanbanhai.springboot.demo.util.Producer;
 import com.ruanbanhai.springboot.demo.util.WebCrawler;
 import lombok.extern.slf4j.Slf4j;
 import org.elasticsearch.action.admin.indices.create.CreateIndexRequestBuilder;
@@ -47,7 +45,6 @@ import java.lang.reflect.Method;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.*;
-import java.util.concurrent.TimeUnit;
 
 import static org.elasticsearch.common.xcontent.XContentFactory.jsonBuilder;
 
@@ -241,22 +238,22 @@ public class DemoApplicationTests {
         jedisCluster.expire("tianqi", 60);
     }
 
-    @Test
-    public void test15() throws Exception {
-        Producer producer = new Producer("producerName");
-        for (int i = 0; i < 10; i++) {
-            producer.putMessage("tianqi" + i, "今天天气好晴朗" + i);
-        }
-    }
-
-    @Test
-    public void test16() {
-        Consumer consumer = new Consumer("consumerName");
-        for (int i = 0; i < 10; i++) {
-            String s = consumer.receiveMessage("tianqi" + i);
-            System.out.println(s);
-        }
-    }
+//    @Test
+//    public void test15() throws Exception {
+//        Producer producer = new Producer("producerName");
+//        for (int i = 0; i < 10; i++) {
+//            producer.putMessage("tianqi" + i, "今天天气好晴朗" + i);
+//        }
+//    }
+//
+//    @Test
+//    public void test16() {
+//        Consumer consumer = new Consumer("consumerName");
+//        for (int i = 0; i < 10; i++) {
+//            String s = consumer.receiveMessage("tianqi" + i);
+//            System.out.println(s);
+//        }
+//    }
 
     public void test17(Object object) throws IntrospectionException, InvocationTargetException, IllegalAccessException {
         Map<String,Object> map = new HashMap<>();
@@ -298,8 +295,8 @@ public class DemoApplicationTests {
     @Test
     public void test18() throws IllegalAccessException, IntrospectionException, InvocationTargetException {
         Goods goods = new Goods();
-        goods.setId(1);
-        goods.setGoodsName("中国人");
+        goods.setId(8);
+        goods.setGoodsName("深圳");
         goods.setGoodsDescription("国家富强");
         test17(goods);
     }
@@ -432,5 +429,12 @@ public class DemoApplicationTests {
         System.out.println(map);
     }
 
+    @Resource(name = "redisQueue")
+    private RedisTemplate stringRedisTemplate;
+
+    @Test
+    public void test27(){
+        stringRedisTemplate.opsForValue().set("key","今天天气好晴朗");
+    }
 }
 
