@@ -1,6 +1,7 @@
 package com.ruanbanhai.springboot.demo.controller;
 import com.ruanbanhai.springboot.demo.pojo.User;
 import com.ruanbanhai.springboot.demo.service.CURDService;
+import com.ruanbanhai.springboot.demo.service.MessageProvider;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -18,9 +19,13 @@ public class CURDDemoController{
     @Autowired
     private CURDService curdService;
 
+    @Autowired
+    private MessageProvider messageProvider;
+
     @RequestMapping(value = "/demo",method = RequestMethod.POST)
     public void demo1(@RequestBody User user){
-        System.out.println(user.getUsername());
-        curdService.insertData(user);
+//        System.out.println(user.getUsername());
+//        curdService.insertData(user);
+        messageProvider.push(user);
     }
 }

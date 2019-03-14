@@ -116,11 +116,11 @@
 			<artifactId>fastjson</artifactId>
 			<version>1.2.51</version>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-log4j2</artifactId>
-			<version>2.1.1.RELEASE</version>
-		</dependency>
+		<!--<dependency>-->
+			<!--<groupId>org.springframework.boot</groupId>-->
+			<!--<artifactId>spring-boot-starter-log4j2</artifactId>-->
+			<!--<version>2.1.1.RELEASE</version>-->
+		<!--</dependency>-->
 		<dependency>
 			<groupId>commons-beanutils</groupId>
 			<artifactId>commons-beanutils</artifactId>
@@ -170,6 +170,21 @@
 			<groupId>com.alicp.jetcache</groupId>
 			<artifactId>jetcache-core</artifactId>
 			<version>2.5.11</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-netflix-ribbon</artifactId>
+			<version>2.2.0.BUILD-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-stream-rabbit</artifactId>
+			<version>2.2.0.BUILD-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.zengtengpeng</groupId>
+			<artifactId>auto-code</artifactId>
+			<version>2.0.0</version>
 		</dependency>
 	</dependencies>
 	<repositories>
