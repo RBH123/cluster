@@ -1,5 +1,6 @@
 package com.ruanbanhai.springboot.demo.service.Impl;
 
+import com.ruanbanhai.springboot.demo.pojo.Goods;
 import com.ruanbanhai.springboot.demo.pojo.User;
 import com.ruanbanhai.springboot.demo.service.MessageProvider;
 import com.ruanbanhai.springboot.demo.service.Source;
@@ -15,7 +16,7 @@ public class MessageProviderImpl implements MessageProvider {
     private MessageChannel output;
 
     @Override
-    public void push(User user) {
-        this.output.send(MessageBuilder.withPayload(user).build());
+    public void push(Object obj) {
+        this.output.send(MessageBuilder.withPayload(obj).setHeader("Content-Type",obj.getClass().getSimpleName()).build());
     }
 }
