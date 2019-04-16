@@ -1,4 +1,5 @@
 package com.ruanbanhai.springboot.demo.util;
+
 import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -8,7 +9,6 @@ import org.springframework.data.redis.connection.lettuce.LettuceClientConfigurat
 import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
 import org.springframework.data.redis.connection.lettuce.LettucePoolingClientConfiguration;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 import redis.clients.jedis.HostAndPort;
 import redis.clients.jedis.JedisCluster;
@@ -33,18 +33,18 @@ public class RedisConfig {
     private String nodes;
 
     @Bean(name = "jedisCluster")
-    public JedisCluster jedisCluster(LettuceConnectionFactory lettuceConnectionFactory){
+    public JedisCluster jedisCluster(LettuceConnectionFactory lettuceConnectionFactory) {
         String[] split = nodes.split(",");
         Set<HostAndPort> cluster = new HashSet<HostAndPort>();
         for (String s : split) {
             String[] node = s.split(":");
-            cluster.add(new HostAndPort(node[0],Integer.parseInt(node[1])));
+            cluster.add(new HostAndPort(node[0], Integer.parseInt(node[1])));
         }
         return new JedisCluster(cluster);
     }
 
     @Bean(name = "redisQueue")
-    public RedisTemplate reidsTemplate(LettuceConnectionFactory lettuceConnectionFactory){
+    public RedisTemplate reidsTemplate(LettuceConnectionFactory lettuceConnectionFactory) {
         System.out.println(hostname);
         RedisTemplate redisTemplate = new RedisTemplate();
         redisTemplate.setConnectionFactory(lettuceConnectionFactory());
@@ -55,7 +55,7 @@ public class RedisConfig {
     }
 
 
-//    //构造链接工厂
+    //    //构造链接工厂
 //    private RedisConnectionFactory redisConnectionFactory(String hostname, int port, int maxIdle, int maxActive, int maxWait){
 //        JedisConnectionFactory jedisConnectionFactory = new JedisConnectionFactory();
 //        jedisConnectionFactory.setHostName(hostname);
@@ -66,13 +66,13 @@ public class RedisConfig {
 //        return jedisConnectionFactory;
 //    }
     @Bean
-    public LettuceConnectionFactory lettuceConnectionFactory(){
+    public LettuceConnectionFactory lettuceConnectionFactory() {
         RedisStandaloneConfiguration redisStandaloneConfiguration = new RedisStandaloneConfiguration();
         redisStandaloneConfiguration.setDatabase(0);
         redisStandaloneConfiguration.setHostName(hostname);
-        redisStandaloneConfiguration.setPort(port != null?Integer.parseInt(port):0);
+        redisStandaloneConfiguration.setPort(port != null ? Integer.parseInt(port) : 0);
         LettuceClientConfiguration lettuceClientConfiguration = LettucePoolingClientConfiguration
-                .builder().poolConfig(poolConfig()) 
+                .builder().poolConfig(poolConfig())
                 .build();
         LettuceConnectionFactory connectionFactory = new LettuceConnectionFactory(redisStandaloneConfiguration, lettuceClientConfiguration);
         return connectionFactory;
@@ -86,10 +86,10 @@ public class RedisConfig {
 //        jedisPoolConfig.setMaxIdle(maxIdle);
 //        return jedisPoolConfig;
 //    }
-    public GenericObjectPoolConfig poolConfig(){
+    public GenericObjectPoolConfig poolConfig() {
         GenericObjectPoolConfig genericObjectPoolConfig = new GenericObjectPoolConfig();
-        genericObjectPoolConfig.setMaxTotal(maxActive != null?Integer.parseInt(maxActive):0);
-        genericObjectPoolConfig.setMaxIdle(maxIdle != null?Integer.parseInt(maxIdle):0);
+        genericObjectPoolConfig.setMaxTotal(maxActive != null ? Integer.parseInt(maxActive) : 0);
+        genericObjectPoolConfig.setMaxIdle(maxIdle != null ? Integer.parseInt(maxIdle) : 0);
         return genericObjectPoolConfig;
     }
 }

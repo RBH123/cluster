@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class BannerController {
 
     @RequestMapping("/banner")
-    public BannerItem queryBanner(){
+    public BannerItem queryBanner() {
         BannerItem bannerItem = new BannerItem();
         bannerItem.setItemImage("https://test-aopsmsg.pingan.com.cn:8020/group2/M00/00/23/HgQUYluGBcOAKsBdAAAOESH23AY327.jpg#w=381;h=486");
         bannerItem.setItemJumpUrl("native://topicpage?topicId=401&topic_id=401");

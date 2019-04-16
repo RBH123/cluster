@@ -1,25 +1,19 @@
 package com.ruanbanhai.springboot.demo;
 
-import com.alicp.jetcache.anno.CreateCache;
 import com.alicp.jetcache.anno.config.EnableCreateCacheAnnotation;
 import com.alicp.jetcache.anno.config.EnableMethodCache;
 import com.ruanbanhai.springboot.demo.util.kafka.KafkaProducer;
-import com.zengtengpeng.autoCode.StartCode;
-import com.zengtengpeng.autoCode.config.AutoCodeConfig;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletComponentScan;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.annotation.EnableCaching;
-import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 
 import javax.annotation.PostConstruct;
-import java.util.Properties;
 
 @SpringBootApplication
 @ServletComponentScan
@@ -39,7 +33,7 @@ public class DemoApplication {
     }
 
     public static void main(String[] args) {
-        System.setProperty("es.set.netty.runtime.available.processors","false");
+        System.setProperty("es.set.netty.runtime.available.processors", "false");
         SpringApplication.run(DemoApplication.class, args);
     }
 
