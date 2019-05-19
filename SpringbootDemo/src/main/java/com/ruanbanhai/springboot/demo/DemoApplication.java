@@ -1,6 +1,5 @@
 package com.ruanbanhai.springboot.demo;
 
-import com.ruanbanhai.springboot.demo.util.kafka.ConsumerQueue;
 import com.ruanbanhai.springboot.demo.util.kafka.KafkaProducer;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,23 +20,23 @@ import javax.annotation.PostConstruct;
 @MapperScan(value = "com.ruanbanhai.springboot.demo.dao")
 public class DemoApplication {
 
-	@Autowired
-	public KafkaProducer producer;
+    @Autowired
+    public KafkaProducer producer;
 
-	@PostConstruct
-	public void init(){
-		producer.send();
-	}
+    @PostConstruct
+    public void init() {
+        producer.send();
+    }
 
-	public static void main(String[] args) {
-		SpringApplication.run(DemoApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(DemoApplication.class, args);
+    }
 
-	@Bean
- 	public static PropertySourcesPlaceholderConfigurer placeholderConfigurer() {
-		PropertySourcesPlaceholderConfigurer c = new PropertySourcesPlaceholderConfigurer();
- 		c.setIgnoreUnresolvablePlaceholders(true);
- 		return c;
-}
+    @Bean
+    public static PropertySourcesPlaceholderConfigurer placeholderConfigurer() {
+        PropertySourcesPlaceholderConfigurer c = new PropertySourcesPlaceholderConfigurer();
+        c.setIgnoreUnresolvablePlaceholders(true);
+        return c;
+    }
 }
 
