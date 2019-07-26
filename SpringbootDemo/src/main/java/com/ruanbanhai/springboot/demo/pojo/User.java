@@ -22,7 +22,6 @@ public class User {
      * This method returns the value of the database column user.username
      *
      * @return the value of user.username
-     *
      * @mbggenerated Fri Dec 21 14:30:47 CST 2018
      */
     public String getUsername() {
@@ -34,7 +33,6 @@ public class User {
      * This method sets the value of the database column user.username
      *
      * @param username the value for user.username
-     *
      * @mbggenerated Fri Dec 21 14:30:47 CST 2018
      */
     public void setUsername(String username) {
@@ -46,7 +44,6 @@ public class User {
      * This method returns the value of the database column user.password
      *
      * @return the value of user.password
-     *
      * @mbggenerated Fri Dec 21 14:30:47 CST 2018
      */
     public Long getPassword() {
@@ -58,7 +55,6 @@ public class User {
      * This method sets the value of the database column user.password
      *
      * @param password the value for user.password
-     *
      * @mbggenerated Fri Dec 21 14:30:47 CST 2018
      */
     public void setPassword(Long password) {

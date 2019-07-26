@@ -25,41 +25,41 @@ public class WebCrawler {
         //获取输入流
         InputStream inputStream = connection.getInputStream();
         //创建输入流
-        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream,"UTF-8"));
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
         //创建输出流
-        BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(new File(path,System.currentTimeMillis()+".txt"))));
+        BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(new File(path, System.currentTimeMillis() + ".txt"))));
         //一次读取一行
         String line = null;
         //读取网页中的链接
 //        Pattern p=Pattern.compile("<a .*href=.+</a>");
         Pattern p = Pattern.compile("<img .*src=.");
         //读取数据
-        while((line = bufferedReader.readLine()) != null){
+        while ((line = bufferedReader.readLine()) != null) {
             //匹配正则
             Matcher matcher = p.matcher(line);
             //匹配成功
-            while(matcher.find()){
+            while (matcher.find()) {
                 String group = matcher.group();
                 System.out.println(group);
                 //截取
                 int i = line.indexOf(group);
-                String lines = line.substring(i+group.length());
+                String lines = line.substring(i + group.length());
                 System.out.println(lines);
-                if("/".equals(lines.charAt(0)+"") && "/".equals(lines.charAt(1)+"")){
+                if ("/".equals(lines.charAt(0) + "") && "/".equals(lines.charAt(1) + "")) {
                     lines = lines.substring(2);
                 }
                 int index = lines.indexOf("\" ");
                 System.out.println(index);
-                if(index != -1) {
-                    String str = lines.substring(0,index-1);
+                if (index != -1) {
+                    String str = lines.substring(0, index - 1);
 //                    if("\"".equals(str.charAt(str.length()-1)+"")){
 //                        str = str.substring(0,str.length()-1);
 //                    }
                     System.out.println(str);
                     String format = str.substring(str.lastIndexOf(".") + 1);
-                    if("jpg".equals(format) || "png".equals(format) || "gif".equals(format) || "jpng".equals(format)){
+                    if ("jpg".equals(format) || "png".equals(format) || "gif".equals(format) || "jpng".equals(format)) {
                         //写入文件
-                        bufferedWriter.write(str,0,str.length());
+                        bufferedWriter.write(str, 0, str.length());
                         bufferedWriter.newLine();
                     }
                 }

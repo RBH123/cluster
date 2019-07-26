@@ -34,14 +34,14 @@ public class EsConfig {
     private final Logger logger = LoggerFactory.getLogger(EsConfig.class);
 
     @Bean
-    public TransportClient getClient(){
+    public TransportClient getClient() {
         log.info("初始化开始");
-        log.info("hostname:{},post:{},clustername:{}",hostName,port,clusterName);
+        log.info("hostname:{},post:{},clustername:{}", hostName, port, clusterName);
         TransportClient transportClient = null;
         try {
-            Settings settings = Settings.builder().put("cluster.name",clusterName).build();
+            Settings settings = Settings.builder().put("cluster.name", clusterName).build();
             transportClient = new PreBuiltTransportClient(settings);
-            transportClient.addTransportAddress(new TransportAddress(InetAddress.getByName(hostName),Integer.valueOf(port)));
+            transportClient.addTransportAddress(new TransportAddress(InetAddress.getByName(hostName), Integer.valueOf(port)));
         } catch (UnknownHostException e) {
             e.printStackTrace();
         }

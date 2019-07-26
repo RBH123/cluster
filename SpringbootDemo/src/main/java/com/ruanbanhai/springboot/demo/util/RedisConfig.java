@@ -1,4 +1,5 @@
 package com.ruanbanhai.springboot.demo.util;
+
 import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -33,19 +34,19 @@ public class RedisConfig {
     private String nodes;
 
     @Bean(name = "jedisCluster")
-    public JedisCluster jedisCluster(){
+    public JedisCluster jedisCluster() {
         String[] split = nodes.split(",");
         Set<HostAndPort> cluster = new HashSet<HostAndPort>();
         for (String s : split) {
             String[] node = s.split(":");
-            cluster.add(new HostAndPort(node[0],Integer.parseInt(node[1])));
+            cluster.add(new HostAndPort(node[0], Integer.parseInt(node[1])));
         }
         return new JedisCluster(cluster);
 
     }
 
     @Bean(name = "redisQueue")
-    public RedisTemplate reidsTemplate(){
+    public RedisTemplate reidsTemplate() {
         System.out.println(hostname);
         RedisTemplate redisTemplate = new RedisTemplate();
         redisTemplate.setConnectionFactory(getLettuceConnectionFactory0());
@@ -56,7 +57,7 @@ public class RedisConfig {
     }
 
     @Bean(name = "stringRedisTemplate")
-    public StringRedisTemplate stringReidsTemplate(){
+    public StringRedisTemplate stringReidsTemplate() {
         StringRedisTemplate redisTemplate = new StringRedisTemplate();
         redisTemplate.setConnectionFactory(getLettuceConnectionFactory1());
         redisTemplate.setKeySerializer(new StringRedisSerializer());
@@ -64,7 +65,7 @@ public class RedisConfig {
         return redisTemplate;
     }
 
-//    //构造链接工厂
+    //    //构造链接工厂
 //    private RedisConnectionFactory redisConnectionFactory(String hostname, int port, int maxIdle, int maxActive, int maxWait){
 //        JedisConnectionFactory jedisConnectionFactory = new JedisConnectionFactory();
 //        jedisConnectionFactory.setHostName(hostname);
@@ -74,19 +75,19 @@ public class RedisConfig {
 //        jedisConnectionFactory.afterPropertiesSet();
 //        return jedisConnectionFactory;
 //    }
-    public LettuceConnectionFactory getLettuceConnectionFactory0(){
+    public LettuceConnectionFactory getLettuceConnectionFactory0() {
         RedisStandaloneConfiguration redisStandaloneConfiguration = new RedisStandaloneConfiguration();
         redisStandaloneConfiguration.setDatabase(0);
         redisStandaloneConfiguration.setHostName(hostname);
         redisStandaloneConfiguration.setPort(Integer.parseInt(port));
         LettuceClientConfiguration lettuceClientConfiguration = LettucePoolingClientConfiguration
-                .builder().poolConfig(poolConfig()) 
+                .builder().poolConfig(poolConfig())
                 .build();
         LettuceConnectionFactory connectionFactory = new LettuceConnectionFactory(redisStandaloneConfiguration, lettuceClientConfiguration);
         return connectionFactory;
     }
 
-    public LettuceConnectionFactory getLettuceConnectionFactory1(){
+    public LettuceConnectionFactory getLettuceConnectionFactory1() {
         RedisStandaloneConfiguration redisStandaloneConfiguration = new RedisStandaloneConfiguration();
         redisStandaloneConfiguration.setDatabase(1);
         redisStandaloneConfiguration.setHostName(hostname);
@@ -116,7 +117,7 @@ public class RedisConfig {
 //        jedisPoolConfig.setMaxIdle(maxIdle);
 //        return jedisPoolConfig;
 //    }
-    public GenericObjectPoolConfig poolConfig(){
+    public GenericObjectPoolConfig poolConfig() {
         GenericObjectPoolConfig genericObjectPoolConfig = new GenericObjectPoolConfig();
         genericObjectPoolConfig.setMaxTotal(Integer.parseInt(maxActive));
         genericObjectPoolConfig.setMaxIdle(Integer.parseInt(maxIdle));

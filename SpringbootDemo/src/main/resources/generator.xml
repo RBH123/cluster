@@ -6,10 +6,12 @@
     <context id="Mysql" targetRuntime="MyBatis3" defaultModelType="flat">
         <property name="beginningDelimiter" value=""/>
         <property name="endingDelimiter" value=""/>
-        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://192.168.17.14:3306/study" userId="root" password="217024"/>
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://192.168.17.14:3306/study"
+                        userId="root" password="217024"/>
         <javaModelGenerator targetPackage="com.ruanbanhai.springboot.demo.pojo" targetProject="src/main/java"/>
         <sqlMapGenerator targetPackage="com.ruanbanhai.springboot.demo.dao" targetProject="src/main/resources"/>
-        <javaClientGenerator type="XMLMAPPER" targetProject="src/main/java" targetPackage="com.ruanbanhai.springboot.demo.dao"/>
+        <javaClientGenerator type="XMLMAPPER" targetProject="src/main/java"
+                             targetPackage="com.ruanbanhai.springboot.demo.dao"/>
         <table tableName="banner_item">
             <generatedKey column="username" sqlStatement="Mysql" identity="true"/>
         </table>

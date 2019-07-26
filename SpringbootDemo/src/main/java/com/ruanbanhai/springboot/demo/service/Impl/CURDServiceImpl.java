@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 @Slf4j
 @Service
-public class CURDServiceImpl implements CURDService{
+public class CURDServiceImpl implements CURDService {
 
     @Autowired
     private UserMapper userMapper;

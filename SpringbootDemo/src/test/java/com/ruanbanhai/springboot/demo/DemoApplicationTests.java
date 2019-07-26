@@ -259,7 +259,7 @@ public class DemoApplicationTests {
     }
 
     public void test17(Object object) throws IntrospectionException, InvocationTargetException, IllegalAccessException {
-        Map<String,Object> map = new HashMap<>();
+        Map<String, Object> map = new HashMap<>();
         BeanInfo beanInfo = Introspector.getBeanInfo(object.getClass());
         PropertyDescriptor[] propertyDescriptors = beanInfo.getPropertyDescriptors();
         for (PropertyDescriptor propertyDescriptor : propertyDescriptors) {
@@ -267,7 +267,7 @@ public class DemoApplicationTests {
             if (!name.equals("class")) {
                 Method readMethod = propertyDescriptor.getReadMethod();
                 Object value = readMethod.invoke(object);
-                map.put(name,value);
+                map.put(name, value);
             }
         }
         BulkProcessor bulkProcessor = BulkProcessor.builder(client, new BulkProcessor.Listener() {
@@ -291,7 +291,7 @@ public class DemoApplicationTests {
                 .setBulkSize(new ByteSizeValue(5, ByteSizeUnit.MB))
                 .setConcurrentRequests(2)
                 .build();
-        bulkProcessor.add(new IndexRequest("user7","type").source(map));
+        bulkProcessor.add(new IndexRequest("user7", "type").source(map));
         bulkProcessor.close();
     }
 
@@ -308,7 +308,7 @@ public class DemoApplicationTests {
     全部查询
      */
     @Test
-    public void test19(){
+    public void test19() {
         SearchResponse searchResponse = client.prepareSearch("user7").setTypes("type").setQuery(QueryBuilders.matchAllQuery()).get();
         SearchHits hits = searchResponse.getHits();
         Iterator<SearchHit> iterator = hits.iterator();
@@ -322,7 +322,7 @@ public class DemoApplicationTests {
     通配符查询
      */
     @Test
-    public void test20(){
+    public void test20() {
         SearchResponse searchResponse = client.prepareSearch("user7").setTypes("type").setQuery(QueryBuilders.wildcardQuery("goodsDescription", "*中*")).get();
         SearchHits hits = searchResponse.getHits();
         Iterator<SearchHit> iterator = hits.iterator();
@@ -336,7 +336,7 @@ public class DemoApplicationTests {
     全文分词查询
      */
     @Test
-    public void test21(){
+    public void test21() {
         SearchResponse searchResponse = client.prepareSearch("user7").setTypes("type").setQuery(QueryBuilders.queryStringQuery("中国")).get();
         SearchHits hits = searchResponse.getHits();
         Iterator<SearchHit> iterator = hits.iterator();
@@ -351,18 +351,18 @@ public class DemoApplicationTests {
      * matchQuery  会将参数进行拆分，然后再进行全文匹配
      */
     @Test
-    public void test22(){
+    public void test22() {
         SearchResponse searchResponse = client.prepareSearch("user7").setTypes("type").setQuery(QueryBuilders.termQuery("goodsDescription", "共和国")).get();
         SearchHits hits = searchResponse.getHits();
-        if(hits != null && hits.getTotalHits() != 0){
+        if (hits != null && hits.getTotalHits() != 0) {
             for (SearchHit hit : hits) {
                 System.out.println("term查询");
                 String sourceAsString = hit.getSourceAsString();
             }
-        }else {
+        } else {
             SearchResponse searchResponse1 = client.prepareSearch("user7").setTypes("type").setQuery(QueryBuilders.matchQuery("goodsDescription", "共和国")).get();
             SearchHits hits1 = searchResponse1.getHits();
-            if(hits1 != null && hits1.getTotalHits() != 0){
+            if (hits1 != null && hits1.getTotalHits() != 0) {
                 for (SearchHit documentFields : hits1) {
                     System.out.println("match查询");
                     String sourceAsString = documentFields.getSourceAsString();
@@ -377,7 +377,7 @@ public class DemoApplicationTests {
      * 批量删除
      */
     @Test
-    public void test23(){
+    public void test23() {
         BulkProcessor bulkProcessor = BulkProcessor.builder(client, new BulkProcessor.Listener() {
             @Override
             public void beforeBulk(long executionId, BulkRequest request) {
@@ -400,14 +400,14 @@ public class DemoApplicationTests {
                 .setBulkActions(5)
                 .build();
         for (int i = 1; i < 10; i++) {
-            bulkProcessor.add(new DeleteRequest(i+7+""));
+            bulkProcessor.add(new DeleteRequest(i + 7 + ""));
         }
         bulkProcessor.close();
     }
 
     @Test
-    public void test24(){
-        String[] texts = {"国","中国"};
+    public void test24() {
+        String[] texts = {"国", "中国"};
         SearchResponse searchRequestBuilder = client.prepareSearch("user7").setTypes("type").setQuery(QueryBuilders.moreLikeThisQuery(texts)).get();
         SearchHits hits = searchRequestBuilder.getHits();
         for (SearchHit hit : hits) {
@@ -418,8 +418,8 @@ public class DemoApplicationTests {
 
 
     @Test
-    public void test25(){
-        redisTemplate.opsForValue().set("goods","小米9");
+    public void test25() {
+        redisTemplate.opsForValue().set("goods", "小米9");
     }
 
     @Test

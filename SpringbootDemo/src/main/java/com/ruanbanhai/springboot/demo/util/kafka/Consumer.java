@@ -33,7 +33,7 @@ public class Consumer {
     //array阻塞队列,有界
     private ArrayBlockingQueue<Goods> queue = new ArrayBlockingQueue<Goods>(10);
 
-    @KafkaListener(topics = {"msg"},idIsGroup = false,id = "consumer1")
+    @KafkaListener(topics = {"msg"}, idIsGroup = false, id = "consumer1")
     public void receive(ConsumerRecord<?, ?> consumerRecord) throws Exception {
         System.out.println("消费者1消费");
         Optional<Object> value = Optional.ofNullable(consumerRecord.value());
@@ -53,7 +53,7 @@ public class Consumer {
 //        consumerQueue.run();
 //    }
 
-    @KafkaListener(topics = {"msg"},idIsGroup = false,id = "consumer2")
+    @KafkaListener(topics = {"msg"}, idIsGroup = false, id = "consumer2")
     public void receive2(ConsumerRecord<?, ?> consumerRecord) throws Exception {
         System.out.println("消费者2消费");
         Optional<Object> value = Optional.ofNullable(consumerRecord.value());

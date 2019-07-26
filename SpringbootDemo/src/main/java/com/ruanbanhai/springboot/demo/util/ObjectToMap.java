@@ -16,17 +16,17 @@ import java.util.TreeMap;
 
 public class ObjectToMap {
 
-    public static Map<String,Object> toMap(Object object) throws IntrospectionException, InvocationTargetException, IllegalAccessException {
+    public static Map<String, Object> toMap(Object object) throws IntrospectionException, InvocationTargetException, IllegalAccessException {
         Class<?> clazz = object.getClass();
         BeanInfo beanInfo = Introspector.getBeanInfo(clazz);
         PropertyDescriptor[] propertyDescriptors = beanInfo.getPropertyDescriptors();
-        Map<String,Object> map = new TreeMap<>();
+        Map<String, Object> map = new TreeMap<>();
         for (PropertyDescriptor property : propertyDescriptors) {
-            if(!"class".equalsIgnoreCase(property.getName())){
+            if (!"class".equalsIgnoreCase(property.getName())) {
                 Method method = property.getReadMethod();
                 Object value = method.invoke(object);
-                if(value != null){
-                    map.put(property.getName(),value);
+                if (value != null) {
+                    map.put(property.getName(), value);
                 }
             }
         }

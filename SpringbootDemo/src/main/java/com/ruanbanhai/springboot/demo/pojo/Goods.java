@@ -10,7 +10,7 @@ import java.io.Serializable;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Goods implements Serializable{
+public class Goods implements Serializable {
 
     @Id
     private long id;

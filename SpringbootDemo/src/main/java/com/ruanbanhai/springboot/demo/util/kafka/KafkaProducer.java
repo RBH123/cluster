@@ -20,7 +20,7 @@ public class KafkaProducer {
             goods.setId(30 + i);
             goods.setGoodsDescription("中国制造");
             goods.setGoodsName("华为mate20");
-            kafkaTemplate.send("msg",i,"msg-"+i,JSON.toJSONString(goods));
+            kafkaTemplate.send("msg", i, "msg-" + i, JSON.toJSONString(goods));
 //            TopicPartition topicPartition = new TopicPartition("message",2);
 ////            int partition = topicPartition.partition();
 ////            System.out.println(partition);

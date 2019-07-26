@@ -45,15 +45,15 @@ mybatis:
   type-aliases-package: com.ruanbanhai.springboot.demo.pojo
 
 redis:
-    database: 1
-    host: 192.168.17.15
-    port: 6379
-    pool:
-      max-active: 8
-      max-idle: 1
-      max-wait: 0
-      min-idle: 0
-    timeout: 0
+  database: 1
+  host: 192.168.17.15
+  port: 6379
+  pool:
+    max-active: 8
+    max-idle: 1
+    max-wait: 0
+    min-idle: 0
+  timeout: 0
 
 eureka:
   instance:

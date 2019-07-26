@@ -2,6 +2,11 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
-    <mapping directory="D:\Code\spring" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/JavaWeb" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/dubbo" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/mybatis" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/rocketmq-externals" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/spring" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/springcloud" vcs="Git" />
   </component>
 </project>

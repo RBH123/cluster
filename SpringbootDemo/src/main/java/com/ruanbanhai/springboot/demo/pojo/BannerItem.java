@@ -27,7 +27,6 @@ public class BannerItem {
      * This method returns the value of the database column banner_item.item_image
      *
      * @return the value of banner_item.item_image
-     *
      * @mbggenerated Tue Dec 25 17:35:29 CST 2018
      */
     public String getItemImage() {
@@ -39,7 +38,6 @@ public class BannerItem {
      * This method sets the value of the database column banner_item.item_image
      *
      * @param itemImage the value for banner_item.item_image
-     *
      * @mbggenerated Tue Dec 25 17:35:29 CST 2018
      */
     public void setItemImage(String itemImage) {
@@ -51,7 +49,6 @@ public class BannerItem {
      * This method returns the value of the database column banner_item.item_jump_url
      *
      * @return the value of banner_item.item_jump_url
-     *
      * @mbggenerated Tue Dec 25 17:35:29 CST 2018
      */
     public String getItemJumpUrl() {
@@ -63,7 +60,6 @@ public class BannerItem {
      * This method sets the value of the database column banner_item.item_jump_url
      *
      * @param itemJumpUrl the value for banner_item.item_jump_url
-     *
      * @mbggenerated Tue Dec 25 17:35:29 CST 2018
      */
     public void setItemJumpUrl(String itemJumpUrl) {

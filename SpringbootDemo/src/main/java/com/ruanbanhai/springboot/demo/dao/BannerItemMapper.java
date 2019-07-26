@@ -2,7 +2,9 @@ package com.ruanbanhai.springboot.demo.dao;
 
 import com.ruanbanhai.springboot.demo.pojo.BannerItem;
 import com.ruanbanhai.springboot.demo.pojo.BannerItemExample;
+
 import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 public interface BannerItemMapper {

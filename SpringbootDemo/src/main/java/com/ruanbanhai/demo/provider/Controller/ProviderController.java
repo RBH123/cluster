@@ -12,8 +12,8 @@ public class ProviderController {
     @Autowired
     private Provider provider;
 
-    @RequestMapping(value = "/provider",method = RequestMethod.GET)
-    public void proViderTest(){
+    @RequestMapping(value = "/provider", method = RequestMethod.GET)
+    public void proViderTest() {
         provider.producer();
     }
 }

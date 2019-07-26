@@ -2,7 +2,9 @@ package com.ruanbanhai.springboot.demo.dao;
 
 import com.ruanbanhai.springboot.demo.pojo.User;
 import com.ruanbanhai.springboot.demo.pojo.UserExample;
+
 import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 public interface UserMapper {

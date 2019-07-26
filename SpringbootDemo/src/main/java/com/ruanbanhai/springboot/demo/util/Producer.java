@@ -14,19 +14,20 @@ import redis.clients.jedis.JedisCluster;
 import javax.annotation.Resource;
 
 @Slf4j
-public class Producer implements ApplicationContextAware{
+public class Producer implements ApplicationContextAware {
 
     private JedisCluster jedisCluster;
     private String producerName;
 
-    public Producer(String producerName){
+    public Producer(String producerName) {
         this.producerName = producerName;
         init();
     }
 
-    public void init(){
-        this.jedisCluster = (JedisCluster)SpringBootUtils.getBean("jedisCluster");
+    public void init() {
+        this.jedisCluster = (JedisCluster) SpringBootUtils.getBean("jedisCluster");
     }
+
     public void putMessage(String queue, String message) throws Exception {
         System.out.println(jedisCluster);
         if (StringUtils.isNotEmpty(queue) && StringUtils.isNotEmpty(message)) {

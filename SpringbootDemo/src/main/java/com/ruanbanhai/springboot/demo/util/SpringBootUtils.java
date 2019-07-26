@@ -12,28 +12,28 @@ public class SpringBootUtils implements ApplicationContextAware {
 
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        if(SpringBootUtils.applicationContext == null){
+        if (SpringBootUtils.applicationContext == null) {
             SpringBootUtils.applicationContext = applicationContext;
         }
     }
 
     //获取applicationContext
-    public static ApplicationContext getApplicationContext(){
+    public static ApplicationContext getApplicationContext() {
         return applicationContext;
     }
 
     //通过name获取对象
-    public static Object getBean(String beanName){
+    public static Object getBean(String beanName) {
         return getApplicationContext().getBean(beanName);
     }
 
     //通过class获取对象
-    public static<T> Object getBean(Class<T> clazz){
+    public static <T> Object getBean(Class<T> clazz) {
         return getApplicationContext().getBean(clazz);
     }
 
     //通过name和class获取对象
-    public static<T> Object getBean(String beanName,Class<T> clazz){
-        return getApplicationContext().getBean(beanName,clazz);
+    public static <T> Object getBean(String beanName, Class<T> clazz) {
+        return getApplicationContext().getBean(beanName, clazz);
     }
 }
